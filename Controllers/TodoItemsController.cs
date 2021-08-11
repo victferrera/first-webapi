@@ -23,20 +23,38 @@ namespace FirstWebApi.Controllers
         }
 
         [HttpGet]
-        public JsonResult Get()
+        public async Task<JsonResult> GetAsync()
         {
-            var itens = _context.TodoItem.ToList();
+            var itens = await _context.TodoItem.ToListAsync();
             return Json(itens);
-
         }
 
         [HttpPost]
-        public TodoItem Create(TodoItem todo)
+        public async Task<TodoItem> CreateAsync(TodoItem todo)
         {
             _context.Add(todo);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return todo;
+        }
+
+        [HttpPut]
+        public async Task<JsonResult> UpdateAsync(TodoItem todo)
+        {
+            if(todo.Id == null)
+            {
+                return Json("Id cannot be null");
+            }
+
+            var obj = _context.TodoItem.Find(todo.Id);
+
+            obj.Name = todo.Name;
+            obj.IsCompleted = todo.IsCompleted;
+
+            _context.Update(obj);
+            await _context.SaveChangesAsync();
+
+            return Json(obj);
         }
 
     }

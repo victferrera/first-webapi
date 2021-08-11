@@ -30,7 +30,8 @@ namespace FirstWebApi
             });
             */
 
-            services.AddDbContext<TodoContext>(options => options.UseInMemoryDatabase("TodoList"));
+            services.AddDbContext<TodoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("firstapi")));
+
             services.AddControllers().AddNewtonsoftJson();
         }
 
