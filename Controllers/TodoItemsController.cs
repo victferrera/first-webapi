@@ -29,6 +29,17 @@ namespace FirstWebApi.Controllers
             return Json(itens);
         }
 
+        [HttpGet("{id}")]
+        public async Task<JsonResult> GetByIdAsync(int id)
+        {
+            var todo = await _context.TodoItem.FindAsync(id);
+
+            if (todo == null)
+                return Json("Data not found on database");
+
+            return Json(todo);
+        }
+
         [HttpPost]
         public async Task<TodoItem> CreateAsync(TodoItem todo)
         {
@@ -38,15 +49,13 @@ namespace FirstWebApi.Controllers
             return todo;
         }
 
-        [HttpPut]
-        public async Task<JsonResult> UpdateAsync(TodoItem todo)
+        [HttpPut("{id}")]
+        public async Task<JsonResult> UpdateAsync(int id, TodoItem todo)
         {
-            if(todo.Id == null)
-            {
-                return Json("Id cannot be null");
-            }
+            var obj = _context.TodoItem.Find(id);
 
-            var obj = _context.TodoItem.Find(todo.Id);
+            if (obj == null)
+                return Json("Data not found on database");
 
             obj.Name = todo.Name;
             obj.IsCompleted = todo.IsCompleted;
@@ -55,6 +64,20 @@ namespace FirstWebApi.Controllers
             await _context.SaveChangesAsync();
 
             return Json(obj);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<JsonResult> DeleteAsync(int id)
+        {
+            var todo = _context.TodoItem.Find(id);
+
+            if (todo == null)
+                return Json("Data not found on database");
+
+            _context.Remove(todo);
+            await _context.SaveChangesAsync();
+
+            return Json(todo);
         }
 
     }

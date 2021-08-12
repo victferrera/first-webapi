@@ -5,7 +5,7 @@ namespace FirstWebApi.Models
     public class TodoItem
     {
         [Key]
-        public int? Id { get; set; }
+        public int Id { get; set; }
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
         [Required(ErrorMessage = "IsComplete is required")]
@@ -13,7 +13,7 @@ namespace FirstWebApi.Models
 
         public TodoItem(){ }
 
-        public TodoItem(int? id, string name, bool isCompleted)
+        public TodoItem(int id, string name, bool isCompleted)
         {
             Id = id;
             Name = name;
