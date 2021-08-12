@@ -52,7 +52,7 @@ namespace FirstWebApi.Controllers
         [HttpPut("{id}")]
         public async Task<JsonResult> UpdateAsync(int id, TodoItem todo)
         {
-            var obj = _context.TodoItem.Find(id);
+            var obj = await _context.TodoItem.FindAsync(id);
 
             if (obj == null)
                 return Json("Data not found on database");
@@ -69,7 +69,7 @@ namespace FirstWebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<JsonResult> DeleteAsync(int id)
         {
-            var todo = _context.TodoItem.Find(id);
+            var todo = await _context.TodoItem.FindAsync(id);
 
             if (todo == null)
                 return Json("Data not found on database");
