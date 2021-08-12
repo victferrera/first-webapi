@@ -6,7 +6,7 @@ using FirstWebApi.Models;
 
 namespace FirstWebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("firstapi/v1/[controller]")]
     [ApiController]
     public class TodoItemsController : Controller
     {
