@@ -22,6 +22,10 @@ namespace FirstWebApi.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Retorna uma lista de TodoItem
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<JsonResult> GetAsync()
         {
@@ -29,6 +33,11 @@ namespace FirstWebApi.Controllers
             return Json(itens);
         }
 
+        /// <summary>
+        /// Retorna um TodoItem pelo ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<JsonResult> GetByIdAsync(int id)
         {
@@ -40,6 +49,11 @@ namespace FirstWebApi.Controllers
             return Json(todo);
         }
 
+        /// <summary>
+        /// Cria um novo TodoItem
+        /// </summary>
+        /// <param name="todo"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<TodoItem> CreateAsync(TodoItem todo)
         {
@@ -49,6 +63,12 @@ namespace FirstWebApi.Controllers
             return todo;
         }
 
+        /// <summary>
+        /// Atualiza um TodoItem pelo ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="todo"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<JsonResult> UpdateAsync(int id, TodoItem todo)
         {
@@ -66,6 +86,11 @@ namespace FirstWebApi.Controllers
             return Json(obj);
         }
 
+        /// <summary>
+        /// Remove um TodoItem pelo ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<JsonResult> DeleteAsync(int id)
         {
